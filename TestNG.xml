@@ -1,0 +1,7 @@
+<suite name="Amphibian" configfailurepolicy="continue" parallel="false">
+	<test name="test1" annotations="JDK" preserve-order="true">
+		<classes>
+			<class name="Runner.TestngRunner"/>
+		</classes>
+	</test>
+</suite>

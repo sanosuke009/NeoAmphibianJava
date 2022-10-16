@@ -1,0 +1,8 @@
+{
+	"platformName":   "Android",           
+	"platformVersion":   "6.0",          
+	"appPackage": "com.android.calculator2",
+	"appActivity": "com.android.calculator2.Calculator",
+	"deviceName":   "TA38501MVU",
+	"automationName":   "UiAutomator2" 
+}
