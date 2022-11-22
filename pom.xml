@@ -11,8 +11,10 @@
   <url>http://maven.apache.org</url>
 
   <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.build.timestamp.format>ddMMhhmm</maven.build.timestamp.format>
+	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	<maven.compiler.source>1.8</maven.compiler.source>
+	<maven.compiler.target>1.8</maven.compiler.target>
+	<maven.build.timestamp.format>ddMMhhmm</maven.build.timestamp.format>
   </properties>
 
   <dependencies>
@@ -20,44 +22,32 @@
 	<dependency>
 	    <groupId>org.testng</groupId>
 	    <artifactId>testng</artifactId>
-	    <version>7.4.0</version>
+	    <version>7.5</version>
 	    <scope>test</scope>
 	</dependency>
 	 <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-testng -->
 	<dependency>
 	    <groupId>io.cucumber</groupId>
 	    <artifactId>cucumber-testng</artifactId>
-	    <version>6.11.0</version>
+	    <version>7.9.0</version>
 	</dependency>
 	 <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
 	<dependency>
 	    <groupId>io.cucumber</groupId>
 	    <artifactId>cucumber-java</artifactId>
-	    <version>6.11.0</version>
+	    <version>7.9.0</version>
 	</dependency>
 	 <!-- https://mvnrepository.com/artifact/net.masterthought/cucumber-reporting -->
 	<dependency>
 	    <groupId>net.masterthought</groupId>
 	    <artifactId>cucumber-reporting</artifactId>
-	    <version>5.6.0</version>
+	    <version>5.7.1</version>
 	</dependency>
-	 <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-server -->
+	<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
 	<dependency>
-	    <groupId>org.seleniumhq.selenium</groupId>
-	    <artifactId>selenium-server</artifactId>
-	    <version>4.0.0-alpha-2</version>
-	</dependency>
-	<!-- https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
-	<dependency>
-	    <groupId>io.github.bonigarcia</groupId>
-	    <artifactId>webdrivermanager</artifactId>
-	    <version>5.0.3</version>
-	</dependency>
-	<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-chrome-driver -->
-	<dependency>
-	    <groupId>org.seleniumhq.selenium</groupId>
-	    <artifactId>selenium-chrome-driver</artifactId>
-	    <version>4.0.0</version>
+		<groupId>org.seleniumhq.selenium</groupId>
+		<artifactId>selenium-java</artifactId>
+		<version>4.6.0</version>
 	</dependency>
 	<!-- https://mvnrepository.com/artifact/io.appium/java-client -->
 	<dependency>
@@ -96,44 +86,54 @@
   		<plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.0.0-M5</version>
+        <version>3.0.0-M7</version>
         <configuration>
+			<testFailureIgnore>true</testFailureIgnore>
           <suiteXmlFiles>
             <suiteXmlFile>TestNG.xml</suiteXmlFile>
           </suiteXmlFiles>
         </configuration>
       </plugin>
       <plugin>
-                <groupId>net.masterthought</groupId>
-                <artifactId>maven-cucumber-reporting</artifactId>
-                <version>3.3.0</version>
-                <executions>
-                    <execution>
-                        <id>execution</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <projectName>MyTestCucumberProject</projectName>
-                            <outputDirectory>Results/cucumber-report-html_${maven.build.timestamp}</outputDirectory>
-                            <cucumberOutput>Results/cucumberjson/cucumber.json</cucumberOutput>
-                            <parallelTesting>false</parallelTesting>
-                        </configuration>
-                    </execution>
-                </executions>
-                <dependencies>
-				   <dependency>
-				      <groupId>org.apache.logging.log4j</groupId>
-				      <artifactId>log4j-api</artifactId>
-				      <version>2.6</version>
-				    </dependency>
-				    <dependency>
-				      <groupId>org.apache.logging.log4j</groupId>
-				      <artifactId>log4j-core</artifactId>
-				      <version>2.6</version>
-				    </dependency>
-				  </dependencies>
+		<groupId>net.masterthought</groupId>
+		<artifactId>maven-cucumber-reporting</artifactId>
+		<version>5.7.1</version>
+		<executions>
+			<execution>
+				<id>execution</id>
+				<phase>verify</phase>
+				<goals>
+					<goal>generate</goal>
+				</goals>
+				<configuration>
+					<projectName>MyTestCucumberProject</projectName>
+					<!-- optional, per documentation set this to "true" to bypass generation of Cucumber Reports entirely, defaults to false if not specified -->
+					<skip>false</skip>
+					<!-- output directory for the generated report -->
+					<outputDirectory>Results/cucumber-report-html_${maven.build.timestamp}</outputDirectory>
+					<!-- optional, defaults to outputDirectory if not specified -->
+					<inputDirectory>Results/</inputDirectory>
+					<jsonFiles>
+						<!-- supports wildcard or name pattern -->
+						<param>**/*.json</param>
+					</jsonFiles>
+					<!-- optional, defaults to outputDirectory if not specified -->
+					<!--classificationDirectory>${project.build.directory}/classifications</classificationDirectory>
+					<classificationFiles>
+							<! supports wildcard or name pattern >
+							<param>sample.properties</param>
+							<param>other.properties</param>
+					</classificationFiles-->
+					<parallelTesting>false</parallelTesting>
+					<!-- optional, set true to group features by its Ids -->
+					<mergeFeaturesById>false</mergeFeaturesById>
+					<!-- optional, set true to get a final report with latest results of the same test from different test runs -->
+					<mergeFeaturesWithRetest>false</mergeFeaturesWithRetest>
+					<!-- optional, set true to fail build on test failures -->
+					<checkBuildResult>false</checkBuildResult>
+				</configuration>
+			</execution>
+		</executions>
             </plugin>
   	</plugins>
   </build>

@@ -29,7 +29,7 @@ public class APIMethods {
 	public static boolean validatePOST()
 	{
 		boolean res = true;
-		APIManager ap = new APIManager(); /*String url = b.get("URL");String sc = b.get("StatusCode");
+		/*APIManager ap = new APIManager(); String url = b.get("URL");String sc = b.get("StatusCode");
 		String sct = b.get("StatusText");String sj = b.get("StatusJSON");String bj = b.get("BodyJSON");
 		if(res) ap.httpPOST(url, bj);
 		if(res) res = ap.getStatusCode().equals(sc);
@@ -51,7 +51,7 @@ public class APIMethods {
 	public static boolean validatePATCH()
 	{
 		boolean res = true;
-		APIManager ap = new APIManager(); /*String url = b.get("URL");String sc = b.get("StatusCode");
+		/*APIManager ap = new APIManager(); String url = b.get("URL");String sc = b.get("StatusCode");
 		String sct = b.get("StatusText");String sj = b.get("StatusJSON");String bj = b.get("BodyJSON");
 		if(res) ap.httpPATCH(url, bj);
 		if(res) res = ap.getStatusCode().equals(sc);

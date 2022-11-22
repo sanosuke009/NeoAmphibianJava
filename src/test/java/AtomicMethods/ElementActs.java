@@ -1,8 +1,5 @@
 package AtomicMethods;
 
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +20,6 @@ import org.openqa.selenium.support.ui.Select;
 
 import TestManagers.DriverManager;
 import Utilities.ClipBoardUtil;
-import Utilities.FileUtilities;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.WaitOptions;
@@ -89,7 +85,7 @@ public class ElementActs extends DriverManager{
 	{
 		boolean res = false;
 		try {
-			TouchAction<?> ta = new TouchAction((AppiumDriver<WebElement>) driver);
+			TouchAction<?> ta = new TouchAction<>((AppiumDriver<WebElement>) driver);
 			Point leftUpCorner = driver.findElement(loc).getLocation();
 			Rectangle rec = driver.findElement(loc).getRect();
 			int x = leftUpCorner.x + (rec.width/2);
@@ -110,7 +106,7 @@ public class ElementActs extends DriverManager{
 	{
 		boolean res = false;
 		try {
-			TouchAction<?> ta = new TouchAction((AppiumDriver<WebElement>) driver);
+			TouchAction<?> ta = new TouchAction<>((AppiumDriver<WebElement>) driver);
 			Point leftUpCorner = driver.findElement(loc).getLocation();
 			Rectangle rec = driver.findElement(loc).getRect();
 			int x = leftUpCorner.x + (rec.width/2);
@@ -131,7 +127,7 @@ public class ElementActs extends DriverManager{
 	{
 		boolean res = false;
 		try {
-			TouchAction<?> ta = new TouchAction((AppiumDriver<WebElement>) driver);
+			TouchAction<?> ta = new TouchAction<>((AppiumDriver<WebElement>) driver);
 			Point leftUpCorner = driver.findElement(loc).getLocation();
 			Rectangle rec = driver.findElement(loc).getRect();
 			int x = leftUpCorner.x + (rec.width/2);
@@ -157,7 +153,7 @@ public class ElementActs extends DriverManager{
 				,x1 = 0,y1 = 0;
 		try {
 			PointOption<?> pointstart, pointend;
-			TouchAction<?> ta = new TouchAction((AppiumDriver<WebElement>) driver);
+			TouchAction<?> ta = new TouchAction<>((AppiumDriver<WebElement>) driver);
 			Dimension dim = driver.manage().window().getSize();
 			x = dim.width/2;
 			y = dim.height/2;
@@ -533,7 +529,7 @@ public class ElementActs extends DriverManager{
 	{
 		boolean res = false;
 		try {
-			String jspath = FileUtilities.abs(getConfig("dragndropjsfilepath"));
+			//String jspath = FileUtilities.abs(getConfig("dragndropjsfilepath"));
 			
 			WebElement el = wait.until(ExpectedConditions.elementToBeClickable(locator));
 			WebElement el1 = wait.until(ExpectedConditions.elementToBeClickable(locator1));
