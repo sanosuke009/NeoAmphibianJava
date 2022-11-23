@@ -1,9 +1,9 @@
 package TestManagers;
 
-import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -11,21 +11,17 @@ import java.util.NoSuchElementException;
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import Utilities.FileUtilities;
 import Utilities.JsonUtils;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
-import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class DriverManager extends ReportManager{
 	
@@ -34,8 +30,8 @@ public class DriverManager extends ReportManager{
 		try {
 		if(getConfig("browser").equals("chrome"))
 		{
-			WebDriverManager.chromedriver().setup();
-			driver = new ChromeDriver();
+			driver = getConfig("headless").equals("true")?
+			new ChromeDriver(getChromeOptions()):new ChromeDriver();
 			ChromeOptions options = new ChromeOptions();
 			//options.setPageLoadStrategy(PageLoadStrategy.NONE); //Only wait till the basic HTML page loading
 			//options.setPageLoadStrategy(PageLoadStrategy.EAGER);//Wait till all the basic images, not the stylesheets
@@ -55,12 +51,12 @@ public class DriverManager extends ReportManager{
 			prefs.put("download.default_directory", System.getProperty("user.dir")+"\\"+getConfig("downloadpath"));
 			options.setExperimentalOption("prefs", prefs);
 			//options.setExperimentalOption("useAutomationExtension", false);//Deprecated
-			options.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+			//options.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
 			//options.addArguments("start-maximized");
 			//options.addArguments("-headless");
 
 			//========================================================
-			ChromeDriverService services = new ChromeDriverService.Builder().withSilent(true).withLogFile(new File(FileUtilities.abs(getConfig("chromelogpath")))).build();
+			//ChromeDriverService services = new ChromeDriverService.Builder().withSilent(true).withLogFile(new File(FileUtilities.abs(getConfig("chromelogpath")))).build();
 			//driver = new ChromeDriver(services, options);
 			//driver = ThreadGuard.protect(new ChromeDriver(options));//Thread guard protects the ownership of the webdriver.
 			//System.out.println("Initiated webdriver.");
@@ -69,7 +65,6 @@ public class DriverManager extends ReportManager{
 		}
 		else if(getConfig("browser").equals("firefox"))
 		{
-			WebDriverManager.firefoxdriver().setup();
 			driver = new FirefoxDriver();
 			driver.manage().window().maximize();
 		}
@@ -85,19 +80,17 @@ public class DriverManager extends ReportManager{
 		}
 		else
 		{
-			WebDriverManager.iedriver().setup();
 			driver = new InternetExplorerDriver();
 		}
 		driver.manage().deleteAllCookies();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Integer.valueOf(getConfig("implicitwait"))));
-		wait = new WebDriverWait(driver, Integer.valueOf(getConfig("explicitwait")));
+		wait = new WebDriverWait(driver, Duration.ofSeconds(Integer.valueOf(getConfig("explicitwait"))));
 		fwait = new FluentWait<RemoteWebDriver>(driver)
 				.withTimeout(Duration.ofSeconds(Integer.valueOf(getConfig("fluentwaitTimeout"))))
 				.pollingEvery(Duration.ofSeconds(Integer.valueOf(getConfig("fluentwaitPolling"))))
 				.ignoring(NoSuchElementException.class)
 				.withMessage("Waiting for 10 seconds polling every 2 seconds.");
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -108,7 +101,6 @@ public class DriverManager extends ReportManager{
 			driver.get(url);
 			return true;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
 		}
@@ -120,7 +112,6 @@ public class DriverManager extends ReportManager{
 			driver.close();
 			return true;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
 		}
@@ -132,10 +123,36 @@ public class DriverManager extends ReportManager{
 			driver.quit();
 			return true;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
 		}
 	}
+
+	/**
+     * Method getChromeOptions.
+     *
+     * @return the chrome options.
+     */
+    public static ChromeOptions getChromeOptions() {
+        final ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("disable-infobars");
+        chromeOptions.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
+        //chromeOptions.setExperimentalOption("useAutomationExtension", false);
+
+        chromeOptions.addArguments("--disable-gpu");
+        chromeOptions.addArguments("--disable-extensions");
+        chromeOptions.addArguments("--no-sandbox");
+        chromeOptions.addArguments("--disable-dev-shm-usage");
+        //chromeOptions.addArguments("--headless");
+		chromeOptions.setHeadless(true);
+        //chromeOptions.addArguments("--window-size=1580,1280");
+
+        final HashMap<String, Object> prefs = new HashMap<>();
+        prefs.put("credentials_enable_service", false);
+        prefs.put("profile.password_manager_enabled", false);
+        chromeOptions.setExperimentalOption("prefs", prefs);
+
+        return chromeOptions;
+    }
 
 }

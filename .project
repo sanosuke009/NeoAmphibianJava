@@ -11,17 +11,17 @@
 			</arguments>
 		</buildCommand>
 		<buildCommand>
+			<name>org.eclipse.m2e.core.maven2Builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
 			<name>cucumber.eclipse.builder.stepdefinition</name>
 			<arguments>
 			</arguments>
 		</buildCommand>
 		<buildCommand>
 			<name>cucumber.eclipse.builder.gherkin</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
-		<buildCommand>
-			<name>org.eclipse.m2e.core.maven2Builder</name>
 			<arguments>
 			</arguments>
 		</buildCommand>
@@ -33,7 +33,7 @@
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>1665931083235</id>
+			<id>1666463596732</id>
 			<name></name>
 			<type>30</type>
 			<matcher>

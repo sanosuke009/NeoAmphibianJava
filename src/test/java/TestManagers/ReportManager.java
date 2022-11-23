@@ -16,4 +16,16 @@ public class ReportManager extends ConfigManager{
 		scenario.attach(sc, "image/png", "ScreenShot");
 	}
 
+	public synchronized void takeScreenShot(String name)
+	{
+		byte[] sc = driver.getScreenshotAs(OutputType.BYTES);
+		scenario.attach(sc, "image/png", name);
+	}
+
+	public synchronized void takeScreenShot(String screenshotFileType, String name)
+	{
+		byte[] sc = driver.getScreenshotAs(OutputType.BYTES);
+		scenario.attach(sc, screenshotFileType, name);
+	}
+
 }
