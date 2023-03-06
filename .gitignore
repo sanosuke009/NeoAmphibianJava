@@ -24,8 +24,9 @@ hs_err_pid*
 
 Results/*
 /target/
-*.classpath
+.classpath
 .apt_generated/
 .apt_generated_tests/
-.settings/
+.settings/*
 .vscode
+.project
