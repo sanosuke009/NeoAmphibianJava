@@ -18,7 +18,7 @@ public class YouTubePage{
 	{
 		boolean res= true;
 		if(res) res = di.wait(headerVideoTitle(title));
-		if(res) res = di.isExisting(headerVideoTitle(title));
+		if(res) res = di.areExisting(headerVideoTitle(title));
 		if(res) di.report("The title of the video is "+title);
 		else di.report("The title of the video is NOT "+title);
 		di.takeScreenShot();
