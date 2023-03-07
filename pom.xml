@@ -20,22 +20,23 @@
   <dependencies>
     <!-- https://mvnrepository.com/artifact/org.testng/testng -->
 	<dependency>
-	    <groupId>org.testng</groupId>
-	    <artifactId>testng</artifactId>
-	    <version>7.5</version>
-	    <scope>test</scope>
+		<groupId>org.testng</groupId>
+		<artifactId>testng</artifactId>
+		<version>7.7.1</version>
+		<scope>test</scope>
 	</dependency>
-	 <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-testng -->
+
+	<!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-testng -->
 	<dependency>
-	    <groupId>io.cucumber</groupId>
-	    <artifactId>cucumber-testng</artifactId>
-	    <version>7.9.0</version>
+		<groupId>io.cucumber</groupId>
+		<artifactId>cucumber-testng</artifactId>
+		<version>7.11.1</version>
 	</dependency>
 	 <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
 	<dependency>
-	    <groupId>io.cucumber</groupId>
-	    <artifactId>cucumber-java</artifactId>
-	    <version>7.9.0</version>
+		<groupId>io.cucumber</groupId>
+		<artifactId>cucumber-java</artifactId>
+		<version>7.11.1</version>
 	</dependency>
 	 <!-- https://mvnrepository.com/artifact/net.masterthought/cucumber-reporting -->
 	<dependency>
@@ -47,13 +48,13 @@
 	<dependency>
 		<groupId>org.seleniumhq.selenium</groupId>
 		<artifactId>selenium-java</artifactId>
-		<version>4.6.0</version>
+		<version>4.8.1</version>
 	</dependency>
 	<!-- https://mvnrepository.com/artifact/io.appium/java-client -->
 	<dependency>
 	    <groupId>io.appium</groupId>
 	    <artifactId>java-client</artifactId>
-	    <version>7.6.0</version>
+	    <version>8.3.0</version>
 	</dependency>
 	<dependency>
 		  <groupId>io.rest-assured</groupId>
