@@ -1,6 +1,8 @@
 package Utilities;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,7 +20,8 @@ public class JsonUtils {
 		{
 			Gson gson = new Gson();
 			File jf = new File(FileUtilities.abs(path));
-			String jsonString = new String(Files.readFile(jf));
+			InputStream jf_inputstream = new FileInputStream(jf);
+			String jsonString = new String(Files.readFile(jf_inputstream));
 			map = gson.fromJson(jsonString, Map.class);
 		}
 		catch(Exception e)

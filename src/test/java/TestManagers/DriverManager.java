@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 import org.openqa.selenium.Proxy;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -71,12 +70,12 @@ public class DriverManager extends ReportManager{
 		else if(getConfig("browser").equals("android"))
 		{
 			dc = new DesiredCapabilities(JsonUtils.readJson(getConfig("appiumCapabilitiesDefault")));
-			driver = new AndroidDriver<WebElement>(new URL(getConfig("appiumServerURL")), dc);
+			driver = new AndroidDriver(new URL(getConfig("appiumServerURL")), dc);
 		}
 		else if(getConfig("browser").equals("iOS"))
 		{
 			dc = new DesiredCapabilities(JsonUtils.readJson(getConfig("appiumCapabilitiesDefault")));
-			driver = new IOSDriver<WebElement>(new URL(getConfig("appiumServerURL")), dc);
+			driver = new IOSDriver(new URL(getConfig("appiumServerURL")), dc);
 		}
 		else
 		{
@@ -143,8 +142,8 @@ public class DriverManager extends ReportManager{
         chromeOptions.addArguments("--disable-extensions");
         chromeOptions.addArguments("--no-sandbox");
         chromeOptions.addArguments("--disable-dev-shm-usage");
-        //chromeOptions.addArguments("--headless");
-		chromeOptions.setHeadless(true);
+        chromeOptions.addArguments("--headless");
+		//chromeOptions.setHeadless(true);
         //chromeOptions.addArguments("--window-size=1580,1280");
 
         final HashMap<String, Object> prefs = new HashMap<>();

@@ -1,29 +1,24 @@
 package AtomicMethods;
 
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
+import com.google.common.collect.ImmutableMap;
+
 import TestManagers.DriverManager;
 import Utilities.ClipBoardUtil;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.TouchAction;
-import io.appium.java_client.touch.WaitOptions;
-import io.appium.java_client.touch.offset.PointOption;
 
 public class ElementActs extends DriverManager{
 
@@ -80,18 +75,27 @@ public class ElementActs extends DriverManager{
 		return res;
 	}
 	
-	@SuppressWarnings("unchecked")
+
+	/*
+	 * This method needs to be debugged properly because touchaction is deprecated now
+	 */
+	//@SuppressWarnings("unchecked")
 	public synchronized boolean tap(By loc)
 	{
 		boolean res = false;
 		try {
-			TouchAction<?> ta = new TouchAction<>((AppiumDriver<WebElement>) driver);
-			Point leftUpCorner = driver.findElement(loc).getLocation();
-			Rectangle rec = driver.findElement(loc).getRect();
-			int x = leftUpCorner.x + (rec.width/2);
-			int y = leftUpCorner.y + (rec.height/2);
-			PointOption<?> point = PointOption.point(x, y);
-			ta.tap(point);
+			//TouchAction<?> ta = new TouchAction<>((AppiumDriver) driver);
+			RemoteWebElement element = (RemoteWebElement) driver.findElement(loc);
+			//Point leftUpCorner = driver.findElement(loc).getLocation();
+			//Rectangle rec = driver.findElement(loc).getRect();
+			//int x = leftUpCorner.x + (rec.width/2);
+			//int y = leftUpCorner.y + (rec.height/2);
+			//PointOption<?> point = PointOption.point(x, y);
+			// Java
+			((JavascriptExecutor) driver).executeScript("mobile: doubleClickGesture", ImmutableMap.of(
+				"elementId", ((RemoteWebElement) element).getId()
+			));
+			//ta.tap(point);
 			res =  true;
 		}
 		catch(Exception e)
@@ -101,19 +105,22 @@ public class ElementActs extends DriverManager{
 		return res;
 	}
 	
-	@SuppressWarnings("unchecked")
+	/*
+	 * This method needs to be debugged properly because touchaction is deprecated now
+	 */
+	//@SuppressWarnings("unchecked")
 	public synchronized boolean press(By loc)
 	{
 		boolean res = false;
 		try {
-			TouchAction<?> ta = new TouchAction<>((AppiumDriver<WebElement>) driver);
+			/* TouchAction<?> ta = new TouchAction<>((AppiumDriver) driver);
 			Point leftUpCorner = driver.findElement(loc).getLocation();
 			Rectangle rec = driver.findElement(loc).getRect();
 			int x = leftUpCorner.x + (rec.width/2);
 			int y = leftUpCorner.y + (rec.height/2);
 			PointOption<?> point = PointOption.point(x, y);
 			ta.press(point);
-			res =  true;
+			res =  true; */
 		}
 		catch(Exception e)
 		{
@@ -122,19 +129,22 @@ public class ElementActs extends DriverManager{
 		return res;
 	}
 	
-	@SuppressWarnings("unchecked")
+	/*
+	 * This method needs to be debugged properly because touchaction is deprecated now
+	 */
+	//@SuppressWarnings("unchecked")
 	public synchronized boolean longPress(By loc)
 	{
 		boolean res = false;
 		try {
-			TouchAction<?> ta = new TouchAction<>((AppiumDriver<WebElement>) driver);
+			/* TouchAction<?> ta = new TouchAction<>((AppiumDriver<WebElement>) driver);
 			Point leftUpCorner = driver.findElement(loc).getLocation();
 			Rectangle rec = driver.findElement(loc).getRect();
 			int x = leftUpCorner.x + (rec.width/2);
 			int y = leftUpCorner.y + (rec.height/2);
 			PointOption<?> point = PointOption.point(x, y);
-			ta.longPress(point);
-			res =  true;
+			ta.longPress(point); 
+			res =  true;*/
 		}
 		catch(Exception e)
 		{
@@ -143,17 +153,20 @@ public class ElementActs extends DriverManager{
 		return res;
 	}
 	
+	/*
+	 * This method needs to be debugged properly because touchaction is deprecated now
+	 */
 	//Yet to be implemented
-	@SuppressWarnings("unchecked")
+	//@SuppressWarnings("unchecked")
 	public synchronized boolean swipeTo(By loc, Directions dir, int count)
 	{
-		boolean res = false; int ANIMATION_TIME = 200, PRESS_TIME = 200, 
+		/* boolean res = false; int ANIMATION_TIME = 200, PRESS_TIME = 200, 
 				border = 10, amount = 80, 
 				x = 0,y = 0
 				,x1 = 0,y1 = 0;
 		try {
 			PointOption<?> pointstart, pointend;
-			TouchAction<?> ta = new TouchAction<>((AppiumDriver<WebElement>) driver);
+			TouchAction ta = new TouchAction((AppiumDriver) driver);
 			Dimension dim = driver.manage().window().getSize();
 			x = dim.width/2;
 			y = dim.height/2;
@@ -198,7 +211,8 @@ public class ElementActs extends DriverManager{
 		{
 			report("Error occurred during swipe to "+loc);
 		}
-		return res;
+		return res; */
+		return false;
 	}
 	
 	public synchronized boolean sendKeys(By loc, String key)
