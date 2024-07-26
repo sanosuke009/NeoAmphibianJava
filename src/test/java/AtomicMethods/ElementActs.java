@@ -52,7 +52,7 @@ public class ElementActs extends DriverManager{
 	{
 		boolean res = false;
 		try {
-			res = driver.findElements(loc).size()>0;
+			res = !driver.findElements(loc).isEmpty();
 		}
 		catch(Exception e)
 		{
