@@ -18,21 +18,23 @@
   </properties>
 
   <dependencies>
+		<!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
 	<dependency>
 		<groupId>org.jsoup</groupId>
 		<artifactId>jsoup</artifactId>
-		<version>[1.15.3,)</version>
+		<version>[1.18.1,)</version>
 	</dependency>
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
 	<dependency>
 		<groupId>com.fasterxml.jackson.core</groupId>
 		<artifactId>jackson-databind</artifactId>
-		<version>[2.13.4.1,)</version>
+		<version>[2.17.2,)</version>
 	</dependency>
     <!-- https://mvnrepository.com/artifact/org.testng/testng -->
 	<dependency>
 		<groupId>org.testng</groupId>
 		<artifactId>testng</artifactId>
-		<version>7.7.1</version>
+		<version>7.10.2</version>
 		<scope>test</scope>
 	</dependency>
 
@@ -40,56 +42,64 @@
 	<dependency>
 		<groupId>io.cucumber</groupId>
 		<artifactId>cucumber-testng</artifactId>
-		<version>7.11.1</version>
+		<version>7.18.1</version>
 	</dependency>
-	 <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
+	<!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
 	<dependency>
 		<groupId>io.cucumber</groupId>
 		<artifactId>cucumber-java</artifactId>
-		<version>7.11.1</version>
+		<version>7.18.1</version>
 	</dependency>
 	 <!-- https://mvnrepository.com/artifact/net.masterthought/cucumber-reporting -->
 	<dependency>
 	    <groupId>net.masterthought</groupId>
 	    <artifactId>cucumber-reporting</artifactId>
-	    <version>5.7.1</version>
+	    <version>5.8.1</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/net.masterthought/maven-cucumber-reporting -->
+	<dependency>
+		<groupId>net.masterthought</groupId>
+		<artifactId>maven-cucumber-reporting</artifactId>
+		<version>5.8.1</version>
 	</dependency>
 	<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
 	<dependency>
 		<groupId>org.seleniumhq.selenium</groupId>
 		<artifactId>selenium-java</artifactId>
-		<version>4.8.1</version>
+		<version>4.23.0</version>
 	</dependency>
 	<!-- https://mvnrepository.com/artifact/io.appium/java-client -->
 	<dependency>
-	    <groupId>io.appium</groupId>
-	    <artifactId>java-client</artifactId>
-	    <version>8.3.0</version>
+		<groupId>io.appium</groupId>
+		<artifactId>java-client</artifactId>
+		<version>9.2.3</version>
 	</dependency>
+	<!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
 	<dependency>
-		  <groupId>io.rest-assured</groupId>
-		  <artifactId>rest-assured</artifactId>
-		  <version>4.4.0</version>
+		<groupId>io.rest-assured</groupId>
+		<artifactId>rest-assured</artifactId>
+		<version>5.5.0</version>
+		<scope>test</scope>
 	</dependency>
+	<!-- https://mvnrepository.com/artifact/io.rest-assured/json-schema-validator -->
 	<dependency>
-      <groupId>io.rest-assured</groupId>
-      <artifactId>json-schema-validator</artifactId>
-      <version>4.4.0</version>
-      <scope>test</scope>
+		<groupId>io.rest-assured</groupId>
+		<artifactId>json-schema-validator</artifactId>
+		<version>5.5.0</version>
 	</dependency>
-	<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+	<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents.client5/httpclient5 -->
 	<dependency>
-	    <groupId>org.apache.httpcomponents</groupId>
-	    <artifactId>httpclient</artifactId>
-	    <version>4.5.13</version>
+		<groupId>org.apache.httpcomponents.client5</groupId>
+		<artifactId>httpclient5</artifactId>
+		<version>5.3.1</version>
 	</dependency>
-	<!-- https://mvnrepository.com/artifact/com.jcraft/jsch -->
+	<!-- https://mvnrepository.com/artifact/com.github.mwiede/jsch -->
 	<dependency>
-	    <groupId>com.jcraft</groupId>
-	    <artifactId>jsch</artifactId>
-	    <version>0.1.55</version>
+		<groupId>com.github.mwiede</groupId>
+		<artifactId>jsch</artifactId>
+		<version>0.2.18</version>
 	</dependency>
-			
+
   </dependencies>
   
   <build>
@@ -97,7 +107,7 @@
   		<plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.0.0-M7</version>
+        <version>3.3.1</version>
         <configuration>
 			<testFailureIgnore>true</testFailureIgnore>
           <suiteXmlFiles>
@@ -108,7 +118,7 @@
       <plugin>
 		<groupId>net.masterthought</groupId>
 		<artifactId>maven-cucumber-reporting</artifactId>
-		<version>5.7.1</version>
+		<version>5.8.1</version>
 		<executions>
 			<execution>
 				<id>execution</id>
