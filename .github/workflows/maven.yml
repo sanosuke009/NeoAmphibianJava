@@ -42,16 +42,82 @@ jobs:
         path: Results/*
         retention-days: 1
 
-  generate-cucumber-report:
-    name: Generate Cucumber Report
-    runs-on: ubuntu-latest
-    if: always()
-    needs: [ ubuntu-youtube-selenium-java-tests ]
+  windows-youtube-selenium-java-tests:
+    name: Windows - Test Youtube - Selenium Java
+    runs-on: windows-latest
+
     steps:
-    - name: Download Artifacts from Ubuntu
-      uses: actions/download-artifact@v4
-      id: download-ubuntu
+    - name: Checking out
+      uses: actions/checkout@v4
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
       with:
-        name: cucumber-reports-ubuntu
-        path: cucumber-reports-ubuntu
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+    - name: Install with Maven
+      run: mvn clean install -DskipTests
+    - name: Build with Maven
+      run: mvn clean package -DskipTests
+    - name: Test with Maven
+      run: mvn clean test verify
+    - name: Upload artifact
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: cucumber-reports-windows
+        path: Results/*
+        retention-days: 1
+
+  macos-youtube-selenium-java-tests:
+    name: MacOS - Test Youtube - Selenium Java
+    runs-on: macos-latest
+
+    steps:
+    - name: Checking out
+      uses: actions/checkout@v4
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+    - name: Install with Maven
+      run: mvn clean install -DskipTests
+    - name: Build with Maven
+      run: mvn clean package -DskipTests
+    - name: Test with Maven
+      run: mvn clean test verify
+    - name: Upload artifact
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: cucumber-reports-macos
+        path: Results/*
+        retention-days: 1
+
+  # generate-cucumber-report:
+  #   name: Generate Cucumber Report
+  #   runs-on: ubuntu-latest
+  #   if: always()
+  #   needs: [ ubuntu-youtube-selenium-java-tests ]
+  #   steps:
+  #   - name: Download Artifacts from Ubuntu
+  #     uses: actions/download-artifact@v4
+  #     id: download-ubuntu
+  #     with:
+  #       name: cucumber-reports-ubuntu
+  #       path: cucumber-reports-ubuntu
+  #   - name: Download Artifacts from Windows
+  #     uses: actions/download-artifact@v4
+  #     id: download-windows
+  #     with:
+  #       name: cucumber-reports-windows
+  #       path: cucumber-reports-windows
+  #   - name: Download Artifacts from MacOS
+  #     uses: actions/download-artifact@v4
+  #     id: download-macos
+  #     with:
+  #       name: cucumber-reports-macos
+  #       path: cucumber-reports-macos
 

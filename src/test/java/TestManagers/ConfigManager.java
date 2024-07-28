@@ -3,10 +3,10 @@ package TestManagers;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import BaseClasses.BaseC;
+
 import Utilities.FileUtilities;
 
-public class ConfigManager extends BaseC{
+public class ConfigManager extends ReportManager{
 	
 	public ConfigManager(String path)
 	{
