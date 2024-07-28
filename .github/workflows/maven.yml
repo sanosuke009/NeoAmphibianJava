@@ -96,28 +96,28 @@ jobs:
         path: Results/*
         retention-days: 1
 
-  generate-cucumber-report:
-    name: Generate Cucumber Report
-    runs-on: ubuntu-latest
-    if: always()
-    needs: [ ubuntu-youtube-selenium-java-tests ]
-    steps:
-    - name: Download Artifacts from Ubuntu
-      uses: actions/download-artifact@v4
-      id: download-ubuntu
-      with:
-        name: cucumber-reports-ubuntu
-        path: cucumber-reports-ubuntu
-    - name: Download Artifacts from Windows
-      uses: actions/download-artifact@v4
-      id: download-windows
-      with:
-        name: cucumber-reports-windows
-        path: cucumber-reports-windows
-    - name: Download Artifacts from MacOS
-      uses: actions/download-artifact@v4
-      id: download-macos
-      with:
-        name: cucumber-reports-macos
-        path: cucumber-reports-macos
+  # generate-cucumber-report:
+  #   name: Generate Cucumber Report
+  #   runs-on: ubuntu-latest
+  #   if: always()
+  #   needs: [ ubuntu-youtube-selenium-java-tests ]
+  #   steps:
+  #   - name: Download Artifacts from Ubuntu
+  #     uses: actions/download-artifact@v4
+  #     id: download-ubuntu
+  #     with:
+  #       name: cucumber-reports-ubuntu
+  #       path: cucumber-reports-ubuntu
+  #   - name: Download Artifacts from Windows
+  #     uses: actions/download-artifact@v4
+  #     id: download-windows
+  #     with:
+  #       name: cucumber-reports-windows
+  #       path: cucumber-reports-windows
+  #   - name: Download Artifacts from MacOS
+  #     uses: actions/download-artifact@v4
+  #     id: download-macos
+  #     with:
+  #       name: cucumber-reports-macos
+  #       path: cucumber-reports-macos
 
