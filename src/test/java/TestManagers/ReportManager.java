@@ -2,7 +2,9 @@ package TestManagers;
 
 import org.openqa.selenium.OutputType;
 
-public class ReportManager extends ConfigManager{
+import BaseClasses.BaseC;
+
+public class ReportManager extends BaseC{
 	
 	public synchronized void report(String s)
 	{
